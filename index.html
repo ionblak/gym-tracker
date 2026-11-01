@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#14212b">
+<title>Gym Tracker — APOLLON v4</title>
+<link rel="manifest" href="manifest.json"><link rel="icon" href="icons/icon-192.png"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Gym Tracker">
+<style>
+:root{--bg:#f3f5f7;--card:#fff;--ink:#17232d;--muted:#687784;--line:#e2e8ed;--accent:#18794e;--soft:#e8f4ed;--blue:#eaf2ff;--shadow:0 5px 22px #1524310b}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}header{background:#14212b;color:#fff;padding:18px 15px 14px;position:sticky;top:0;z-index:5}header .top{display:flex;justify-content:space-between;align-items:center;gap:10px}h1{font-size:20px;margin:0;letter-spacing:.04em}header p{color:#bdc9d1;margin:6px 0 0;font-size:12px}.pill{font-size:10px;background:#244c3b;color:#b9f0d1;padding:6px 9px;border-radius:30px}.tabs{display:flex;gap:7px;margin-top:14px}.tabs button{flex:1;border:1px solid #ffffff30;background:transparent;color:#d9e1e6;padding:10px 5px;border-radius:10px;font-weight:650}.tabs button.active{background:#fff;color:#14212b}.wrap{max-width:800px;margin:auto;padding:14px 12px 90px}.panel{display:none}.panel.active{display:block}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:var(--shadow)}.hero{background:#1c303b;color:white;border:0}.hero .muted{color:#c2d0d7}.muted{color:var(--muted);font-size:12px;line-height:1.45}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:13px}.stat{background:#ffffff12;border-radius:12px;padding:10px}.stat b{font-size:21px;display:block}.stat span{font-size:10px;color:#c2d0d7}.section-title{font-size:18px;margin:17px 2px 10px}.daygrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}.day{border:1px solid var(--line);border-radius:13px;background:white;padding:10px 4px;text-align:center;cursor:pointer;color:var(--ink)}.day strong{display:block;font-size:12px}.day small{color:var(--muted)}.day.selected{border:2px solid var(--accent);background:var(--soft)}.exercise{border:1px solid var(--line);border-radius:15px;background:#fff;margin:10px 0;overflow:hidden}.exhead{padding:13px 13px 8px;display:flex;justify-content:space-between;gap:8px;align-items:flex-start}.exhead h3{font-size:14px;margin:0 0 4px}.exhead p{margin:0;color:var(--muted);font-size:12px}.exbody{padding:0 13px 13px}.tags{display:flex;gap:5px;flex-wrap:wrap;margin:8px 0}.tag{background:#f0f3f5;padding:5px 8px;border-radius:20px;font-size:10px;color:#45545e}.btn{border:0;border-radius:10px;padding:10px 12px;background:var(--ink);color:white;font-weight:650;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer}.btn.secondary{background:#edf1f4;color:#25343e}.btn.green{background:var(--accent)}.btn.small{padding:8px 10px;font-size:11px}input{width:100%;border:1px solid #d8e0e5;border-radius:9px;padding:10px 8px;font-size:15px;margin-top:4px;background:#fff;color:var(--ink)}.setrow{display:grid;grid-template-columns:58px 1fr 1fr 38px 34px;align-items:center;gap:7px;margin:7px 0}.setrow span{font-size:11px;color:var(--muted)}.setrow input{margin:0;min-width:0;padding:9px 7px}.setrow input::placeholder{color:#a9b5bd}.setrow button{border:0;background:#e8f4ed;color:#18794e;border-radius:8px;padding:9px 0;font-weight:800}.setrow button.del{background:#f7ecec;color:#a2423d}.setrow button:disabled{opacity:.3}.setrow.saved input{border-color:#9fd3b5;background:#f3faf6}.done{color:var(--accent);font-size:11px;font-weight:700;white-space:nowrap}.prev{font-size:11px;color:#45545e;background:#f5f7f8;border-radius:9px;padding:8px 9px;margin-top:10px}.hint{font-size:11px;color:#18794e;background:var(--soft);border-radius:9px;padding:8px 9px;margin-top:6px;font-weight:600}.notice{background:#fff8e8;border:1px solid #f2dfb1;color:#68501d;border-radius:12px;padding:12px;font-size:12px;line-height:1.5;margin-bottom:12px}.bar{height:8px;background:#edf1f3;border-radius:20px;overflow:hidden;margin-top:8px}.bar i{display:block;height:100%;background:var(--accent);width:0}.history{font-size:12px;padding:9px 0;border-bottom:1px solid var(--line)}.empty{padding:20px;text-align:center;color:var(--muted)}.carousel{position:relative;background:#101820;border-radius:11px;overflow:hidden;margin:10px 0 6px}.track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}.track::-webkit-scrollbar{display:none}.slide{flex:0 0 100%;scroll-snap-align:start;margin:0;position:relative;aspect-ratio:850/567}.slide img{width:100%;height:100%;object-fit:cover;display:block}.slide figcaption{position:absolute;left:8px;bottom:8px;background:#000000a6;color:#fff;font-size:11px;padding:4px 9px;border-radius:12px}.slide.broken img{display:none}.slide.broken::after{content:'Фото не завантажилось';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#c2d0d7;font-size:12px;text-align:center;padding:16px}.carousel .nav{position:absolute;top:50%;transform:translateY(-50%);border:0;width:34px;height:34px;border-radius:50%;background:#ffffffde;color:var(--ink);font-size:20px;line-height:1;cursor:pointer;box-shadow:0 2px 8px #0003}.carousel .nav.prev{left:8px}.carousel .nav.next{right:8px}.carousel .nav:disabled{opacity:0;pointer-events:none}.dots{position:absolute;right:10px;bottom:12px;display:flex;gap:5px}.dots i{width:7px;height:7px;border-radius:50%;background:#ffffff70}.dots i.active{background:#fff}.photo-note{font-size:11px;color:var(--muted);margin:0 0 6px}.yt-link{font-size:11px;color:var(--accent);font-weight:650;text-decoration:none}.timer{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}.timer-time{font-size:34px;font-weight:750;font-variant-numeric:tabular-nums}.timer-controls{display:flex;gap:6px;flex-wrap:wrap}.timer-controls button{padding:9px 11px}.timer-presets{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.timer-presets button{border:1px solid var(--line);background:#f5f7f8;border-radius:20px;padding:6px 10px;font-size:11px}.timer-float{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom));z-index:10;display:flex;align-items:center;gap:10px;background:#14212b;color:#fff;border-radius:30px;padding:8px 8px 8px 16px;box-shadow:0 8px 24px #0004}.timer-float b{font-size:20px;font-variant-numeric:tabular-nums;min-width:62px}.timer-float button{border:0;border-radius:20px;padding:8px 12px;font-weight:700;background:#ffffff1f;color:#fff}.timer-float.finished{background:var(--accent)}.seg{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}.seg button{border:1px solid var(--line);background:#f5f7f8;border-radius:20px;padding:6px 10px;font-size:11px;color:var(--ink)}.seg button.active{background:var(--ink);color:#fff;border-color:var(--ink)}.chart-wrap{height:150px;margin-top:8px}.chart-wrap svg{width:100%;height:100%;overflow:visible}.chart-label{font-size:10px;fill:#687784}.progress-item{padding:12px 0;border-bottom:1px solid var(--line)}.progress-item:last-child{border:0}.progress-head{display:flex;justify-content:space-between;gap:8px;align-items:start}.progress-head b{font-size:13px}.progress-head strong{font-size:14px;white-space:nowrap;text-align:right}.small-note{font-size:10px;color:var(--muted)}footer{text-align:center;color:var(--muted);font-size:10px;padding:18px}.hidden{display:none!important}
+@media(min-width:680px){.wrap{padding:22px 22px 90px}.exercise-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}.exercise{margin:0}.exhead{min-height:75px}}
+</style></head>
+<body>
+<header><div class="top"><h1>GYM TRACKER <span style="font-size:11px;color:#b9f0d1">v4.0</span></h1><span class="pill">APOLLON · ІФ</span></div><p>Твій персональний журнал тренувань</p><nav class="tabs"><button class="active" data-tab="home">Огляд</button><button data-tab="workout">Тренування</button><button data-tab="progress">Прогрес</button></nav></header>
+<main class="wrap">
+<section id="home" class="panel active">
+ <div class="card hero"><div class="muted">ТВОЯ ЦІЛЬ</div><h2 style="margin:6px 0 4px;font-size:20px">Сильна та пропорційна верхня частина тіла</h2><div class="muted">Груди · спина · плечі · руки</div><div class="stats"><div class="stat"><b id="totalSessions">0</b><span>тренувань</span></div><div class="stat"><b id="totalSets">0</b><span>підходів</span></div><div class="stat"><b id="exerciseCount">0</b><span>різних вправ</span></div></div></div>
+ <div id="backupNotice" class="notice hidden"><b>Час зробити резервну копію.</b> <span id="backupText"></span><br><button class="btn secondary small" style="margin-top:8px" onclick="exportData()">Експортувати JSON</button></div>
+ <h2 class="section-title">Тижневий розклад</h2><div class="daygrid"><button class="day" data-day="A"><strong>ПН · A</strong><small>Груди + спина</small></button><button class="day" data-day="B"><strong>СР · B</strong><small>Спина + плечі</small></button><button class="day" data-day="C"><strong>ПТ · C</strong><small>Груди + руки</small></button><button class="day" data-day="D"><strong>НД · D</strong><small>Плечі + руки</small></button></div>
+ <h2 class="section-title">Наступне тренування</h2><div class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><div><b id="nextTitle">Тренування A</b><div class="muted" id="nextSubtitle"></div></div><button class="btn green" onclick="openWorkout(nextDay())">Почати</button></div><div class="bar"><i id="weekBar"></i></div><div class="muted" id="weekText" style="margin-top:7px">Цього тижня: 0 із 4 тренувань</div></div>
+ <h2 class="section-title">Таймер відпочинку</h2><div class="card"><div class="timer"><div><div class="muted">ЧАС ДО КІНЦЯ ПЕРЕРВИ</div><div class="timer-time" id="timerDisplay">01:30</div><div class="muted" id="timerStatus">Готовий до запуску</div></div><div class="timer-controls"><button class="btn green" id="timerStart" onclick="toggleTimer()">Старт</button><button class="btn secondary" onclick="resetTimer()">Скинути</button></div></div><div class="timer-presets"><button onclick="setTimer(60)">60 сек</button><button onclick="setTimer(90)">90 сек</button><button onclick="setTimer(120)">120 сек</button></div><div class="small-note" style="margin-top:8px">Наприкінці перерви пролунає сигнал. Якщо екран телефона заблоковано, браузер призупиняє сторінку — сигнал спрацює, коли повернешся до неї.</div></div>
+ <div class="notice"><b>Як використовувати 4-й день:</b> це коротке допоміжне тренування на плечі та руки (приблизно 30–40 хв). Залишай щонайменше один день відпочинку між силовими заняттями; з огляду на початковий рівень почни з нього лише після 3–4 тижнів стабільних тренувань A/B/C, або скороти по одному підходу в інших днях, якщо відновлення не встигає. Не тренуйся через біль.<br><br><b>Примітка щодо APOLLON:</b> точний список тренажерів залу ще не підтверджений. Вправи підібрані під типове обладнання силової зони; якщо тренажера немає — скористайся зазначеною заміною.</div>
+</section>
+<section id="workout" class="panel"><h2 class="section-title" style="margin-top:2px">Тренування</h2><div class="daygrid" style="margin-bottom:13px"><button class="day selected" data-day="A"><strong>День A</strong><small>Пн</small></button><button class="day" data-day="B"><strong>День B</strong><small>Ср</small></button><button class="day" data-day="C"><strong>День C</strong><small>Пт</small></button><button class="day" data-day="D"><strong>День D</strong><small>Нд</small></button></div><div id="workoutIntro" class="muted" style="margin:0 2px 12px"></div><div id="exerciseList" class="exercise-list"></div><button class="btn green" style="width:100%;margin-top:14px" onclick="finishWorkout()">Завершити тренування</button></section>
+<section id="progress" class="panel"><h2 class="section-title" style="margin-top:2px">Прогрес</h2><div class="card"><div class="seg" id="metricSwitch"></div><p class="muted" id="metricNote"></p><div id="progressList"></div></div><h2 class="section-title">Історія тренувань</h2><div class="card" id="historyList"><div class="empty">Поки немає записів. Проведи перше тренування!</div></div><div class="card"><b>Резервна копія</b><p class="muted">Експортуй дані час від часу. Локальна історія зберігається у браузері цього пристрою і може зникнути, якщо браузер очистить дані сайту.</p><p class="muted" id="lastExportText"></p><button class="btn secondary" onclick="exportData()">Експортувати JSON</button> <button class="btn secondary" onclick="document.getElementById('importFile').click()">Імпортувати</button><input id="importFile" type="file" accept="application/json" class="hidden" onchange="importData(event)"></div></section>
+<footer>GYM TRACKER · APOLLON · версія 4.0 · локальне збереження на цьому пристрої<br>Фото вправ: <a href="https://github.com/yuhonas/free-exercise-db" target="_blank" rel="noopener" style="color:inherit">Free Exercise DB</a> (суспільне надбання)</footer>
+</main>
+<div id="timerFloat" class="timer-float hidden"><span>⏱</span><b id="floatTime">01:30</b><button id="floatToggle" onclick="toggleTimer()">Пауза</button><button onclick="resetTimer()" aria-label="Закрити таймер">✕</button></div>
+<script>
+// id — стабільний ідентифікатор вправи: за ним зберігається історія, тож одна вправа в різних днях має спільний прогрес.
+// Не змінюй id існуючих вправ, інакше історія від них «відʼєднається».
+const plan={A:{name:'Груди та спина',items:[
+{id:'chest-press',name:'Жим від грудей у тренажері',scheme:'3 × 10–12',muscles:'Груди, трицепс',cues:'Сидіння налаштуй так, щоб ручки були приблизно на рівні середини грудей. Лопатки стабільні, не відривай спину від спинки.',query:'seated chest press machine proper form',alt:'Якщо немає: жим гантелей на горизонтальній лаві.'},
+{id:'lat-pulldown',name:'Верхня тяга до грудей',scheme:'3 × 10–12',muscles:'Найширші м’язи спини',cues:'Зафіксуй стегна, потягни руків’я до верхньої частини грудей, веди лікті вниз. Не розгойдуй корпус.',query:'lat pulldown proper form Jeff Nippard',alt:'Не тягни гриф за голову.'},
+{id:'seated-cable-row',name:'Горизонтальна тяга блоку',scheme:'2 × 10–12',muscles:'Середня частина спини',cues:'Сядь рівно, потягни руків’я до живота, зведи лопатки й повільно поверни руки.',query:'seated cable row proper form',alt:'Якщо немає: тяга тренажера з упором грудьми.'},
+{id:'pec-deck',name:'Зведення рук Pec Deck',scheme:'2 × 12–15',muscles:'Грудні м’язи',cues:'Лікті м’яко зігнуті. Зводь руки перед грудьми без ривків, повертай повільно.',query:'pec deck chest fly proper form',alt:'Якщо немає: зведення рук на кросовері.'},
+{id:'machine-curl',name:'Згинання рук на біцепс',scheme:'2 × 10–12',muscles:'Біцепс',cues:'Лікті тримай біля тулуба, не розгойдуйся. Підіймай і опускай вагу контрольовано.',query:'machine biceps curl proper form',alt:'Можна виконувати на нижньому блоці.'},
+{id:'triceps-pushdown',name:'Розгинання рук на блоці',scheme:'2 × 10–12',muscles:'Трицепс',cues:'Лікті притиснуті до боків. Розігни руки вниз, не рухаючи плечима.',query:'triceps rope pushdown proper form',alt:'Можна використовувати пряму ручку або канат.'}]},
+B:{name:'Спина та плечі',items:[
+{id:'neutral-lat-pulldown',name:'Верхня тяга нейтральним хватом',scheme:'3 × 10–12',muscles:'Найширші м’язи спини',cues:'Візьми паралельні ручки, опускай лікті вниз до боків, не закидай корпус назад.',query:'neutral grip lat pulldown proper form',alt:'Якщо немає нейтральної ручки — звичайна верхня тяга.'},
+{id:'chest-supported-row',name:'Тяга з упором грудьми',scheme:'2 × 10–12',muscles:'Середня частина спини',cues:'Груди залишаються на подушці, тягни лікті назад і не піднімай плечі до вух.',query:'chest supported row machine proper form',alt:'Заміна: горизонтальна тяга сидячи.'},
+{id:'shoulder-press',name:'Жим плечима в тренажері',scheme:'3 × 10–12',muscles:'Плечі, трицепс',cues:'Ручки стартують приблизно на рівні вух. Не прогинай поперек, не блокуй лікті різко.',query:'machine shoulder press proper form',alt:'Якщо дискомфорт у плечі — зменш вагу або пропусти.'},
+{id:'lateral-raise',name:'Розведення рук у сторони',scheme:'3 × 12–15',muscles:'Середні дельти',cues:'Піднімай лікті в сторони до комфортної висоти, без махів і розгойдування.',query:'lateral raise machine proper form',alt:'Заміна: розведення гантелей або нижній блок.'},
+{id:'reverse-pec-deck',name:'Зворотний Pec Deck',scheme:'2 × 12–15',muscles:'Задні дельти',cues:'Груди притиснуті до спинки, розводь руки в сторони, не задирай плечі.',query:'reverse pec deck rear delt proper form',alt:'Заміна: розведення на задню дельту в кросовері.'},
+{id:'cable-curl',name:'Згинання рук на нижньому блоці',scheme:'2 × 10–12',muscles:'Біцепс',cues:'Лікті біля тулуба, корпус нерухомий, опускай руків’я повільно.',query:'cable biceps curl proper form',alt:'Заміна: тренажер для біцепса або гантелі.'}]},
+C:{name:'Груди, руки та плечі',items:[
+{id:'incline-chest-press',name:'Жим на похилому тренажері',scheme:'3 × 10–12',muscles:'Верх грудей, трицепс',cues:'Спинка під кутом приблизно 20–30°. Контролюй опускання, не відривай таз.',query:'incline chest press machine proper form',alt:'Заміна: жим гантелей на похилій лаві.'},
+{id:'chest-press',name:'Жим від грудей у тренажері',scheme:'2 × 10–12',muscles:'Грудні м’язи',cues:'Виконуй у контрольованій амплітуді, не замикай лікті різко.',query:'seated chest press machine proper form',alt:'Якщо немає другого тренажера, зроби 2 додаткові підходи Pec Deck.'},
+{id:'lateral-raise',name:'Розведення рук у сторони',scheme:'2 × 12–15',muscles:'Середні дельти',cues:'Рух плавний, не використовуй інерцію.',query:'lateral raise machine proper form',alt:'Заміна: гантелі або кросовер.'},
+{id:'preacher-curl',name:'Згинання рук на біцепс із упором',scheme:'3 × 10–12',muscles:'Біцепс',cues:'Плечі зафіксовані на подушці, не відривай лікті, повільно опускай вагу.',query:'preacher curl machine proper form',alt:'Заміна: згинання рук на нижньому блоці.'},
+{id:'triceps-extension',name:'Розгинання рук на трицепс',scheme:'3 × 10–12',muscles:'Трицепс',cues:'Плечі нерухомі, рух відбувається в ліктьовому суглобі.',query:'triceps extension machine proper form',alt:'Заміна: розгинання на блоці з канатом.'},
+{id:'face-pull',name:'Face Pull',scheme:'2 × 12–15',muscles:'Задні дельти, верх спини',cues:'Тягни канат до рівня обличчя, лікті розведені, не прогинай поперек.',query:'face pull cable proper form',alt:'Якщо немає блоку — зворотний Pec Deck.'}]},
+D:{name:'Плечі та руки · легший день',items:[
+{id:'lateral-raise',name:'Розведення рук у сторони',scheme:'2 × 12–15',muscles:'Середні дельти',cues:'Відрегулюй тренажер так, щоб вісь руху була комфортною для плеча. Піднімай руки плавно, не розгойдуй корпус.',query:'lateral raise machine proper form',alt:'Заміна: розведення гантелей сидячи або нижній блок.'},
+{id:'reverse-pec-deck',name:'Зворотний Pec Deck',scheme:'2 × 12–15',muscles:'Задні дельти',cues:'Груди притиснуті до опори. Розводь руки контрольовано, не задирай плечі.',query:'reverse pec deck rear delt proper form',alt:'Заміна: face pull на блоці.'},
+{id:'cable-curl',name:'Згинання рук на нижньому блоці',scheme:'2 × 10–12',muscles:'Біцепс',cues:'Тримай лікті біля тулуба, не відхиляйся назад. Повільно опускай руків’я.',query:'cable biceps curl proper form',alt:'Заміна: тренажер для біцепса або гантелі.'},
+{id:'rope-pushdown',name:'Розгинання рук на блоці з канатом',scheme:'2 × 10–12',muscles:'Трицепс',cues:'Лікті зафіксовані біля тулуба. Розігни руки вниз і в кінці трохи розведи кінці каната.',query:'rope triceps pushdown proper form',alt:'Заміна: тренажер для трицепса.'},
+{id:'hammer-curl',name:'Молоткове згинання на блоці або з гантелями',scheme:'2 × 10–12',muscles:'Біцепс, плечовий м’яз, передпліччя',cues:'Долоні дивляться одна на одну. Лікті тримай біля корпусу, без інерції.',query:'hammer curl proper form',alt:'Заміна: канат на нижньому блоці.'}]}};
+// Фото техніки лежать у photos/<id вправи>-1.jpg (початкове положення) і -2.jpg (кінцеве).
+// Джерело — Free Exercise DB (суспільне надбання), відповідність вправ — у README.
+const PHOTO_CAPTIONS=['Початкове положення','Кінцеве положення'];
+// Пояснення для вправ, де на фото не зовсім той тренажер, що в плані.
+const photoNotes={
+'chest-supported-row':'На фото — Т-тяга з упором грудьми; на тренажері з сидінням принцип той самий: груди на подушці, тягнеш лікті назад.',
+'lateral-raise':'Фото тренажера для розведень немає, тут — варіант на нижньому блоці (він же заміна). Траєкторія руки однакова.',
+'triceps-extension':'На фото — розгинання з канатом над головою на блоці (заміна з плану). У тренажері рух той самий: плечі нерухомі, працює лише лікоть.'};
+// Версії 1–3 зберігали записи за позицією вправи в дні («A-0»). Ця таблиця переносить їх на стабільні id.
+const LEGACY_IDS={'A-0':'chest-press','A-1':'lat-pulldown','A-2':'seated-cable-row','A-3':'pec-deck','A-4':'machine-curl','A-5':'triceps-pushdown','B-0':'neutral-lat-pulldown','B-1':'chest-supported-row','B-2':'shoulder-press','B-3':'lateral-raise','B-4':'reverse-pec-deck','B-5':'cable-curl','C-0':'incline-chest-press','C-1':'chest-press','C-2':'lateral-raise','C-3':'preacher-curl','C-4':'triceps-extension','C-5':'face-pull','D-0':'lateral-raise','D-1':'reverse-pec-deck','D-2':'cable-curl','D-3':'rope-pushdown','D-4':'hammer-curl'};
+const STORAGE_KEY='apollonGymTrackerV4',DRAFTS_STORAGE_KEY='apollonGymTrackerV4Drafts',LEGACY_STORAGE_KEYS=['apollonGymTrackerV3','apollonGymTrackerV2','apollonGymTrackerV1'];
+const BACKUP_REMINDER_INTERVAL_DAYS=14,REST_DEFAULT_SECONDS=90,WEIGHT_STEP_KG=2.5,WORKOUTS_PER_WEEK=4;
+const METRICS={weight:{label:'Макс. вага',note:'Найбільша робоча вага, записана у вправі за окреме тренування.'},e1rm:{label:'Розрах. 1ПМ',note:'Орієнтовний максимум на 1 повторення за формулою Еплі: вага × (1 + повторення / 30). Враховує і вагу, і повторення.'},volume:{label:'Об’єм',note:'Сума «вага × повторення» за всі підходи вправи в тренуванні.'}};
+
+let state=load(),current='A',metric='weight',drafts=loadDrafts(),rowsWanted={};
+let timer={total:REST_DEFAULT_SECONDS,left:REST_DEFAULT_SECONDS,endAt:null,tick:null,finished:false},audioCtx=null;
+
+// ---------- дати (місцевий час, не UTC) ----------
+function pad2(n){return String(n).padStart(2,'0')}
+function localDate(d=new Date()){return d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate())}
+function fmtDate(key){let [y,m,d]=key.split('-');return d+'.'+m+'.'+y}
+function fmtNum(n){return String(Math.round(n*10)/10)}
+
+// ---------- зберігання та міграція ----------
+function emptyState(){return {version:4,logs:[],records:{},lastExport:null}}
+function migrate(d){
+  if(!d||!Array.isArray(d.logs)||!d.records||typeof d.records!=='object')throw Error('Невірний формат');
+  if(d.version===4){
+    if(!Object.values(d.records).every(r=>r&&Array.isArray(r.entries)))throw Error('Невірний формат');
+    return {...emptyState(),...d};
+  }
+  let s=emptyState();
+  Object.entries(d.records).forEach(([key,rec])=>{
+    let id=LEGACY_IDS[key];if(!id||!rec||!Array.isArray(rec.entries))return;
+    let target=s.records[id]||(s.records[id]={entries:[]});
+    rec.entries.forEach(en=>target.entries.push({date:localDate(new Date(en.date)),at:en.date,day:en.day,sets:(en.sets||[]).map(x=>({weight:Number(x.weight)||0,reps:Number(x.reps)||0}))}));
+  });
+  Object.values(s.records).forEach(r=>r.entries.sort((a,b)=>a.at.localeCompare(b.at)));
+  s.logs=d.logs.map(l=>({date:localDate(new Date(l.date)),at:l.date,day:l.day,finished:!!l.finished}));
+  return s;
+}
+function load(){
+  try{
+    let raw=localStorage.getItem(STORAGE_KEY);if(raw)return migrate(JSON.parse(raw));
+    // Старі ключі не видаляються — вони лишаються як запасна копія.
+    for(let k of LEGACY_STORAGE_KEYS){raw=localStorage.getItem(k);if(raw)return migrate(JSON.parse(raw))}
+  }catch(e){console.error('Не вдалося прочитати дані',e)}
+  return emptyState();
+}
+// Введені, але ще не збережені (✓) значення теж переживають перезавантаження сторінки — але лише в межах дня.
+function loadDrafts(){try{let d=JSON.parse(localStorage.getItem(DRAFTS_STORAGE_KEY));return d&&d.date===localDate()?d.values:{}}catch(e){return {}}}
+function saveDrafts(){try{localStorage.setItem(DRAFTS_STORAGE_KEY,JSON.stringify({date:localDate(),values:drafts}))}catch(e){}}
+function draftKey(day,id,s){return day+'|'+id+'|'+s}
+function clearDrafts(day){Object.keys(drafts).forEach(k=>{if(!day||k.startsWith(day+'|'))delete drafts[k]});saveDrafts()}
+function save(){
+  try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}catch(e){alert('Не вдалося зберегти дані в браузері. Зроби експорт резервної копії.')}
+  renderStats();renderProgress();
+}
+
+// ---------- модель ----------
+function parseScheme(s){let m=s.match(/(\d+)\s*×\s*(\d+)(?:\s*[–-]\s*(\d+))?/);return m?{sets:+m[1],min:+m[2],max:+(m[3]||m[2])}:{sets:3,min:10,max:12}}
+function cleanSets(en){return en?en.sets.filter(Boolean):[]}
+function getEntry(id,day,date,create){
+  let rec=state.records[id]||(create?(state.records[id]={entries:[]}):null);if(!rec)return null;
+  let en=rec.entries.find(e=>e.date===date&&e.day===day);
+  if(!en&&create){en={date,at:new Date().toISOString(),day,sets:[]};rec.entries.push(en)}
+  return en;
+}
+function previousEntry(id,today){let rec=state.records[id];return rec?rec.entries.filter(e=>e.date<today&&cleanSets(e).length).sort((a,b)=>a.at.localeCompare(b.at)).pop():null}
+function bestWeight(id){let rec=state.records[id];return rec?Math.max(0,...rec.entries.flatMap(cleanSets).map(x=>x.weight)):0}
+function e1rm(w,r){return w>0&&r>0?w*(1+r/30):0}
+function entryValue(en,m){
+  let sets=cleanSets(en);
+  if(m==='weight')return Math.max(0,...sets.map(x=>x.weight));
+  if(m==='e1rm')return Math.round(Math.max(0,...sets.map(x=>e1rm(x.weight,x.reps)))*2)/2;
+  return sets.reduce((a,x)=>a+x.weight*x.reps,0);
+}
+function sessionSets(day,date){let n=0,names=[];catalog().forEach(ex=>{let c=cleanSets(getEntry(ex.id,day,date,false)).length;if(c){n+=c;names.push(ex.name)}});return {count:n,names}}
+function totalSets(){return Object.values(state.records).reduce((a,r)=>a+r.entries.reduce((b,e)=>b+cleanSets(e).length,0),0)}
+function catalog(){
+  let map=new Map();
+  Object.entries(plan).forEach(([day,p])=>p.items.forEach(e=>{let x=map.get(e.id)||{id:e.id,name:e.name,days:[]};if(!x.days.includes(day))x.days.push(day);map.set(e.id,x)}));
+  return [...map.values()];
+}
+function findLog(day,date){return state.logs.find(l=>l.date===date&&l.day===day)}
+function progressionHint(prevSets,sch){
+  let top=Math.max(0,...prevSets.map(x=>x.weight));if(!top)return '';
+  let work=prevSets.filter(x=>x.weight===top);
+  if(work.length>=sch.sets&&work.every(x=>x.reps>=sch.max))return `Минулого разу всі підходи на ${fmtNum(top)} кг дійшли до ${sch.max} повторень — спробуй ${fmtNum(top+WEIGHT_STEP_KG)} кг.`;
+  if(work.some(x=>x.reps<sch.min))return `Було менше ${sch.min} повторень — залиш ${fmtNum(top)} кг, поки не зробиш ${sch.min}+ у кожному підході.`;
+  return `Залиш ${fmtNum(top)} кг і додавай повторення до ${sch.max} у кожному підході.`;
+}
+
+// ---------- навігація ----------
+function switchTab(id){document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('active',x.dataset.tab===id));if(id==='progress')renderProgress();renderTimer()}
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>switchTab(b.dataset.tab));document.querySelectorAll('[data-day]').forEach(b=>b.onclick=()=>openWorkout(b.dataset.day));
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+// ---------- тренування ----------
+function openWorkout(day){current=day;switchTab('workout');renderWorkout()}
+function renderWorkout(){
+  let day=current,today=localDate();
+  document.querySelectorAll('#workout [data-day]').forEach(b=>b.classList.toggle('selected',b.dataset.day===day));
+  document.getElementById('workoutIntro').textContent=plan[day].name+' · '+plan[day].items.length+' вправ. Записуй вагу та повторення для кожного підходу; сірі підказки в полях — результат минулого разу.';
+  document.getElementById('exerciseList').innerHTML=plan[day].items.map((e,i)=>{
+    return `<article class="exercise"><div class="exhead" id="meta-${e.id}">${renderMeta(e,i,day,today)}</div><div class="exbody">${renderCarousel(e)}<a class="yt-link" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=${encodeURIComponent(e.query)}">▶ Відео техніки на YouTube</a><p class="muted">${esc(e.cues)}</p><div class="muted"><b>Заміна / примітка:</b> ${esc(e.alt)}</div><div class="muted" style="font-weight:700;margin-top:12px">ЗАПИС ПІДХОДІВ</div><div id="sets-${e.id}">${renderSets(e,day,today)}</div><div class="small-note" style="margin-top:6px">Введи вагу та фактичну кількість повторень і натисни ✓. Для вправ без додаткової ваги введи 0 кг. Збережений підхід можна виправити й зберегти ще раз.</div><button class="btn secondary small" style="margin-top:10px" onclick="startRest(${REST_DEFAULT_SECONDS})">⏱ Запустити відпочинок ${REST_DEFAULT_SECONDS} сек</button></div></article>`;
+  }).join('');
+}
+function renderCarousel(e){
+  let note=photoNotes[e.id];
+  let slides=PHOTO_CAPTIONS.map((caption,n)=>`<figure class="slide"><img src="photos/${e.id}-${n+1}.jpg" alt="${esc(e.name)} — ${caption}" loading="lazy" onerror="this.parentNode.classList.add('broken')"><figcaption>${n+1} / ${PHOTO_CAPTIONS.length} · ${caption}</figcaption></figure>`).join('');
+  return `<div class="carousel"><div class="track" onscroll="syncCarousel(this)">${slides}</div><button class="nav prev" onclick="slideCarousel(this,-1)" aria-label="Попереднє фото" disabled>‹</button><button class="nav next" onclick="slideCarousel(this,1)" aria-label="Наступне фото">›</button><div class="dots">${PHOTO_CAPTIONS.map((_,n)=>`<i${n?'':' class="active"'}></i>`).join('')}</div></div>${note?`<p class="photo-note">${esc(note)}</p>`:''}`;
+}
+function slideCarousel(btn,dir){let track=btn.parentNode.querySelector('.track');track.scrollBy({left:dir*track.clientWidth,behavior:'smooth'})}
+function syncCarousel(track){
+  let box=track.parentNode,idx=Math.round(track.scrollLeft/track.clientWidth),last=track.children.length-1;
+  box.querySelectorAll('.dots i').forEach((d,n)=>d.classList.toggle('active',n===idx));
+  box.querySelector('.nav.prev').disabled=idx<=0;box.querySelector('.nav.next').disabled=idx>=last;
+}
+function renderMeta(e,i,day,today){
+  let sch=parseScheme(e.scheme),best=bestWeight(e.id),done=cleanSets(getEntry(e.id,day,today,false)).length;
+  return `<div><h3>${i+1}. ${esc(e.name)}</h3><p>${esc(e.muscles)}</p><div class="tags"><span class="tag">${esc(e.scheme)} повторень</span><span class="tag">${best?`краща вага: ${fmtNum(best)} кг`:'ще немає записів'}</span></div></div><span class="done">${done?`${done} з ${sch.sets} ✓`:''}</span>`;
+}
+function renderSets(e,day,today){
+  let sch=parseScheme(e.scheme),saved=(getEntry(e.id,day,today,false)||{sets:[]}).sets,prev=previousEntry(e.id,today),prevSets=cleanSets(prev),count=Math.max(sch.sets,saved.length,rowsWanted[day+'|'+e.id]||0),rows='';
+  for(let s=0;s<count;s++){
+    let sv=saved[s],d=drafts[draftKey(day,e.id,s)]||{},p=prev&&prev.sets[s],w=d.w!==undefined?d.w:(sv?sv.weight:''),r=d.r!==undefined?d.r:(sv?sv.reps:'');
+    rows+=`<div class="setrow${sv?' saved':''}"><span>Підхід ${s+1}</span><input type="number" min="0" step="0.5" inputmode="decimal" placeholder="${p?fmtNum(p.weight)+' кг':'кг'}" id="w-${e.id}-${s}" value="${esc(w)}" oninput="setDraft('${e.id}',${s},'w',this.value)"><input type="number" min="1" step="1" inputmode="numeric" placeholder="${p?p.reps+' повт.':'повт.'}" id="r-${e.id}-${s}" value="${esc(r)}" oninput="setDraft('${e.id}',${s},'r',this.value)"><button onclick="saveSet('${e.id}',${s})" aria-label="Зберегти підхід">✓</button><button class="del" onclick="deleteSet('${e.id}',${s})" aria-label="Видалити підхід"${sv?'':' disabled'}>×</button></div>`;
+  }
+  let prevHtml=prev?`<div class="prev">Минулого разу · ${fmtDate(prev.date)} · день ${esc(prev.day)}: ${prevSets.map(x=>fmtNum(x.weight)+'×'+x.reps).join(' · ')}</div>`:'<div class="prev">Минулих записів ще немає — почни з комфортної ваги.</div>',hint=progressionHint(prevSets,sch);
+  return prevHtml+(hint?`<div class="hint">${esc(hint)}</div>`:'')+rows+`<button class="btn secondary small" onclick="addSetRow('${e.id}')">+ підхід</button>`;
+}
+function refreshExercise(id){
+  let today=localDate(),i=plan[current].items.findIndex(x=>x.id===id),e=plan[current].items[i];
+  document.getElementById('meta-'+id).innerHTML=renderMeta(e,i,current,today);
+  document.getElementById('sets-'+id).innerHTML=renderSets(e,current,today);
+}
+function setDraft(id,s,field,value){let k=draftKey(current,id,s);drafts[k]={...drafts[k],[field]:value};saveDrafts()}
+function addSetRow(id){let e=plan[current].items.find(x=>x.id===id),saved=(getEntry(id,current,localDate(),false)||{sets:[]}).sets,key=current+'|'+id;rowsWanted[key]=Math.max(parseScheme(e.scheme).sets,saved.length,rowsWanted[key]||0)+1;refreshExercise(id)}
+function saveSet(id,s){
+  let wRaw=document.getElementById(`w-${id}-${s}`).value,rRaw=document.getElementById(`r-${id}-${s}`).value,w=Number(wRaw),r=Number(rRaw);
+  if(wRaw===''||!(w>=0)||rRaw===''||!(r>0)||!Number.isInteger(r)){alert('Вкажи вагу та кількість повторень. Для вправ без додаткової ваги введи 0 кг.');return}
+  let today=localDate(),en=getEntry(id,current,today,true);
+  for(let k=en.sets.length;k<s;k++)en.sets[k]=null;
+  en.sets[s]={weight:w,reps:r};
+  if(!findLog(current,today))state.logs.push({date:today,at:new Date().toISOString(),day:current,finished:false});
+  delete drafts[draftKey(current,id,s)];saveDrafts();save();refreshExercise(id);
+}
+function deleteSet(id,s){
+  let today=localDate(),en=getEntry(id,current,today,false);if(!en||!en.sets[s])return;
+  if(!confirm(`Видалити підхід ${s+1}: ${fmtNum(en.sets[s].weight)} кг × ${en.sets[s].reps}?`))return;
+  en.sets[s]=null;while(en.sets.length&&!en.sets[en.sets.length-1])en.sets.pop();
+  if(!en.sets.length){let rec=state.records[id];rec.entries=rec.entries.filter(x=>x!==en)}
+  let log=findLog(current,today);if(log&&!log.finished&&!sessionSets(current,today).count)state.logs=state.logs.filter(x=>x!==log);
+  delete drafts[draftKey(current,id,s)];saveDrafts();save();refreshExercise(id);
+}
+function finishWorkout(){
+  let today=localDate(),{count}=sessionSets(current,today);
+  if(!count){if(confirm('Ще не збережено жодного підходу, тож тренування не буде зараховано. Повернутися на огляд?'))switchTab('home');return}
+  let unsaved=Object.entries(drafts).filter(([k,d])=>k.startsWith(current+'|')&&(d.w||d.r)).length;
+  if(unsaved&&!confirm(`Є ${unsaved} підх. із введеними, але не збереженими (✓) значеннями. Завершити без них?`))return;
+  let log=findLog(current,today);log.finished=true;clearDrafts(current);rowsWanted={};save();
+  alert(`Тренування збережено! ${count} підходів. Гарна робота 💪`);switchTab('home');
+}
+function nextDay(){let last=state.logs.filter(x=>x.finished).sort((a,b)=>b.at.localeCompare(a.at))[0];return last?({A:'B',B:'C',C:'D',D:'A'}[last.day]||'A'):'A'}
+
+// ---------- огляд ----------
+function renderStats(){
+  let finished=state.logs.filter(x=>x.finished),sets=totalSets();
+  document.getElementById('totalSessions').textContent=finished.length;
+  document.getElementById('totalSets').textContent=sets;
+  document.getElementById('exerciseCount').textContent=catalog().length;
+  let n=nextDay();document.getElementById('nextTitle').textContent='Тренування '+n;document.getElementById('nextSubtitle').textContent=plan[n].name+' · '+plan[n].items.length+' вправ';
+  let monday=new Date();monday.setDate(monday.getDate()-(monday.getDay()+6)%7);let mondayKey=localDate(monday),week=finished.filter(x=>x.date>=mondayKey).length;
+  document.getElementById('weekText').textContent=`Цього тижня: ${week} із ${WORKOUTS_PER_WEEK} тренувань`;document.getElementById('weekBar').style.width=Math.min(100,week/WORKOUTS_PER_WEEK*100)+'%';
+  let daysSinceExport=state.lastExport?Math.floor((Date.now()-new Date(state.lastExport))/864e5):null,needBackup=sets>0&&(daysSinceExport===null||daysSinceExport>=BACKUP_REMINDER_INTERVAL_DAYS);
+  document.getElementById('backupNotice').classList.toggle('hidden',!needBackup);
+  document.getElementById('backupText').textContent=daysSinceExport===null?'Ти ще жодного разу не експортував дані — якщо браузер їх очистить, історія зникне.':`Остання копія була ${daysSinceExport} дн. тому.`;
+  document.getElementById('lastExportText').textContent=state.lastExport?'Остання копія: '+fmtDate(localDate(new Date(state.lastExport))):'Резервних копій ще не було.';
+}
+
+// ---------- прогрес ----------
+function makeChart(entries){
+  let unit=metric==='volume'?'кг·повт.':'кг',points=entries.map(en=>({en,v:entryValue(en,metric)})).filter(p=>p.v>0).sort((a,b)=>a.en.at.localeCompare(b.en.at));
+  if(!points.length)return '<div class="small-note">Графік з’явиться після першого запису ваги.</div>';
+  let W=320,H=130,pad=24,vals=points.map(p=>p.v),min=Math.min(...vals),max=Math.max(...vals),range=max-min||1;
+  let coords=points.map((p,i)=>({x:pad+(points.length===1?(W-2*pad)/2:i*(W-2*pad)/(points.length-1)),y:H-pad-((p.v-min)/range)*(H-2*pad),p}));
+  return `<div class="chart-wrap"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Графік прогресу"><line x1="${pad}" y1="${H-pad}" x2="${W-pad}" y2="${H-pad}" stroke="#dfe6ea"/><polyline points="${coords.map(c=>c.x+','+c.y).join(' ')}" fill="none" stroke="#18794e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>${coords.map(c=>`<circle cx="${c.x}" cy="${c.y}" r="4" fill="#18794e"><title>${fmtNum(c.p.v)} ${unit} · ${fmtDate(c.p.en.date)} · день ${esc(c.p.en.day)}</title></circle>`).join('')}<text x="${pad}" y="12" class="chart-label">${fmtNum(max)} ${unit}</text><text x="${pad}" y="${H-3}" class="chart-label">${fmtNum(min)} ${unit}</text><text x="${W-pad}" y="${H-3}" text-anchor="end" class="chart-label">${points.length} тренув.</text></svg></div>`;
+}
+function setMetric(m){metric=m;renderProgress()}
+function renderProgress(){
+  document.getElementById('metricSwitch').innerHTML=Object.entries(METRICS).map(([k,m])=>`<button class="${k===metric?'active':''}" onclick="setMetric('${k}')">${m.label}</button>`).join('');
+  document.getElementById('metricNote').textContent=METRICS[metric].note;
+  document.getElementById('progressList').innerHTML=catalog().map(ex=>{
+    let entries=(state.records[ex.id]||{entries:[]}).entries,flat=entries.flatMap(cleanSets),last=flat[flat.length-1],best=bestWeight(ex.id),bestE1rm=Math.max(0,...entries.map(en=>entryValue(en,'e1rm')));
+    return `<div class="progress-item"><div class="progress-head"><div><b>${esc(ex.name)}</b><div class="muted">${ex.days.length>1?'Дні':'День'} ${ex.days.join(', ')} · ${flat.length} підходів${last?` · останній: ${fmtNum(last.weight)} кг × ${last.reps}`:''}</div></div><strong>${best?fmtNum(best)+' кг':'—'}${bestE1rm?`<div class="small-note">1ПМ ≈ ${fmtNum(bestE1rm)} кг</div>`:''}</strong></div>${makeChart(entries)}</div>`;
+  }).join('');
+  let logs=[...state.logs].sort((a,b)=>b.at.localeCompare(a.at));
+  document.getElementById('historyList').innerHTML=logs.length?logs.map(l=>{let s=sessionSets(l.day,l.date);return `<div class="history"><b>${fmtDate(l.date)} · День ${esc(l.day)}</b><div class="muted">${l.finished?'Завершено':'Не завершено'} · ${s.count} підходів · ${s.names.map(esc).join(', ')||'без вправ'}</div></div>`}).join(''):'<div class="empty">Поки немає записів. Проведи перше тренування!</div>';
+}
+
+// ---------- таймер ----------
+// Час рахується від моменту завершення, тому таймер не відстає, навіть коли браузер пригальмовує сторінку у фоні.
+function formatTime(s){return pad2(Math.floor(s/60))+':'+pad2(s%60)}
+function timerRemaining(){return timer.endAt?Math.max(0,Math.ceil((timer.endAt-Date.now())/1000)):timer.left}
+function timerStatus(text){document.getElementById('timerStatus').textContent=text}
+function renderTimer(){
+  let left=timerRemaining(),running=!!timer.endAt,paused=!running&&left>0&&left<timer.total,label=running?'Пауза':paused?'Продовжити':'Старт';
+  document.getElementById('timerDisplay').textContent=formatTime(left);
+  document.getElementById('timerStart').textContent=label;
+  let float=document.getElementById('timerFloat'),onHome=document.getElementById('home').classList.contains('active');
+  float.classList.toggle('hidden',onHome||!(running||paused||timer.finished));
+  float.classList.toggle('finished',timer.finished);
+  document.getElementById('floatTime').textContent=timer.finished?'Готово':formatTime(left);
+  document.getElementById('floatToggle').classList.toggle('hidden',timer.finished);
+  document.getElementById('floatToggle').textContent=running?'Пауза':'Далі';
+}
+function stopTick(){clearInterval(timer.tick);timer.tick=null}
+function setTimer(s){stopTick();timer={...timer,total:s,left:s,endAt:null,finished:false};timerStatus('Готовий до запуску');renderTimer()}
+function startTimer(){
+  unlockAudio();if(timer.left<=0)timer.left=timer.total;
+  timer.endAt=Date.now()+timer.left*1000;timer.finished=false;stopTick();timer.tick=setInterval(onTimerTick,250);
+  timerStatus('Відпочивай між підходами');renderTimer();
+}
+function pauseTimer(){timer.left=timerRemaining();timer.endAt=null;stopTick();timerStatus('Пауза');renderTimer()}
+function toggleTimer(){timer.endAt?pauseTimer():startTimer()}
+function resetTimer(){setTimer(timer.total)}
+function startRest(s){setTimer(s);startTimer()}
+function onTimerTick(){
+  if(timer.endAt&&timerRemaining()<=0){timer.left=0;timer.endAt=null;timer.finished=true;stopTick();timerStatus('Час відпочинку завершився');signalTimerEnd()}
+  renderTimer();
+}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)onTimerTick()});
+// iOS дозволяє звук лише після дії користувача, тому аудіо «розблоковується» натисканням «Старт».
+function unlockAudio(){try{audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume()}catch(e){}}
+function signalTimerEnd(){
+  if(navigator.vibrate)navigator.vibrate([180,80,180]);
+  if(!audioCtx)return;
+  let t0=audioCtx.currentTime;
+  [0,.35,.7].forEach(dt=>{let o=audioCtx.createOscillator(),g=audioCtx.createGain();o.frequency.value=880;g.gain.setValueAtTime(.3,t0+dt);g.gain.exponentialRampToValueAtTime(.001,t0+dt+.25);o.connect(g).connect(audioCtx.destination);o.start(t0+dt);o.stop(t0+dt+.3)});
+}
+
+// ---------- резервна копія ----------
+function exportData(){
+  state.lastExport=new Date().toISOString();
+  let blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download=`apollon-gym-backup-${localDate()}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  save();
+}
+function importData(ev){
+  let f=ev.target.files[0];ev.target.value='';if(!f)return;
+  let r=new FileReader();
+  r.onload=()=>{
+    let d;try{d=migrate(JSON.parse(r.result))}catch(e){alert('Не вдалося прочитати файл резервної копії.');return}
+    if(!confirm(`Імпорт повністю замінить поточні дані (${totalSets()} підходів) даними з файлу. Продовжити?`))return;
+    state=d;clearDrafts();rowsWanted={};save();renderWorkout();alert('Резервну копію імпортовано.');
+  };
+  r.readAsText(f);
+}
+
+renderStats();renderProgress();renderWorkout();renderTimer();
+
+// PWA: офлайн-кеш і прохання до браузера не видаляти дані сайту автоматично.
+if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost'))navigator.serviceWorker.register('sw.js').catch(e=>console.error('Service worker не зареєстровано',e));
+if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{});
+</script></body></html>
