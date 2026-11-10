@@ -1,7 +1,7 @@
 // Service worker: застосунок працює без інтернету.
 // Сторінка — спершу з мережі (щоб одразу отримувати оновлення), а без мережі чи при повільній — з кешу.
 // Фото та іконки — з кешу. Якщо змінюєш або додаєш фото чи іконки, збільш STATIC_CACHE_VERSION.
-const STATIC_CACHE_VERSION = 1;
+const STATIC_CACHE_VERSION = 2;
 const STATIC_CACHE = `gym-tracker-static-v${STATIC_CACHE_VERSION}`;
 const PAGE_CACHE = 'gym-tracker-page';
 const NETWORK_TIMEOUT_MS = 3000;
